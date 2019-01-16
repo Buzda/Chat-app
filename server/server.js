@@ -24,14 +24,14 @@ io.on('connection', (socket) => {
   //   console.log('createEmail', newEmail);
   // });
 
-  socket.emit('newMessage', {
-    from: 'Ahmed',
-    text: 'what is going on?',
-    careatedAt: 2323
-  });
 
   socket.on('createMessage', (message) => {
     console.log('createMessage', message);
+    io.emit('newMessage', {
+      from: message.from,
+      text: message.text,
+      careatedAt: new Date().getTime()
+    });
   });
 
   socket.on('disconnect', () => {
